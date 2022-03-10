@@ -32,9 +32,9 @@ data_dict = init_row_data()
 data_headers = list(data_dict.keys())
 for itr in range(len(data_headers)): worksheet.write(0, itr, data_headers[itr])
 
-# leitura do arquivo txt
+# reading txt file
 
-file = open(filePath, 'r', encoding='utf-8') # gera uma lista com os dados do arquivo txt
+file = open(filePath, 'r', encoding='utf-8') 
 file_items = file.readlines()
 
 # set lists 

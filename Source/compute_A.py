@@ -88,7 +88,7 @@ def compute_A(j, text, data):
             data['Despesa consumo ativo FP (R$)'] = XCAFP + YCAFP
             data['Fator de carga NP'] = round( CANP / ( DEMNP * ( ciclo - 8 )*3 ), 2)
             data['Fator de carga FP'] = round( CAFP / ( DEMFP * ( ( ciclo - 8 )*21 + 8*24 )), 2)
-        if line.find('YCANPG') == 69: # checar código da bandeira verde em contas antigas
+        if line.find('YCANPG') == 69: # check code with green flag in old files 
             data['VERDE Consumo ativo NP (kWh)'] = CANP
             data['VERDE Consumo ativo FP (kWh)'] = CAFP                   
             data['VERDE Despesa consumo ativo NP (R$)'] = XCANP + YCANP
@@ -100,7 +100,7 @@ def compute_A(j, text, data):
             data['AMARELA Despesa consumo ativo NP (R$)'] = XCANP + YCANP
             data['AMARELA Despesa consumo ativo FP (R$)'] = XCAFP + YCAFP
             data['Dias bandeira AMARELA'] = ciclo
-        if line.find('YCANPR') == 69: # checar código da bandeira vermelha em contas antigas 
+        if line.find('YCANPR') == 69: # check code with red flag in old files  
             data['VERMELHA Consumo ativo NP (kWh)'] = CANP
             data['VERMELHA Consumo ativo FP (kWh)'] = CAFP                   
             data['VERMELHA Despesa consumo ativo NP (R$)'] = XCANP + YCANP
