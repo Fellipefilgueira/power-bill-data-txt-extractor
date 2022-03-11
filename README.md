@@ -17,13 +17,13 @@ Current stable build: 1.0.0
     Demanda ativa contratada (kW)
     Demanda ativa contratada FP (kW)
     Demanda ativa contratada NP (kW)
-	
-	  Demanda ativa (kW)
-	  Demanda ativa FP (kW)
-	  Demanda ativa NP (kW)
-	  Despesa demanda ativa (R$)
-	  Despesa demanda ativa FP (R$)
-	  Despesa demanda ativa NP (R$)
+    
+    Demanda ativa (kW)
+    Demanda ativa FP (kW)
+    Demanda ativa NP (kW)
+    Despesa demanda ativa (R$)
+    Despesa demanda ativa FP (R$)
+    Despesa demanda ativa NP (R$)
 
     Demanda ultrapassagem (kW)
     Demanda ultrapassagem FP (kW)
