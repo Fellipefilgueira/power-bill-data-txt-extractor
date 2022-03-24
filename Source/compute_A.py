@@ -100,7 +100,6 @@ def compute_A(j, text, data):
             data['AMARELA Despesa consumo ativo NP (R$)'] = XCANP + YCANP
             data['AMARELA Despesa consumo ativo FP (R$)'] = XCAFP + YCAFP
             data['Dias bandeira AMARELA'] = ciclo
-            print(XCAFP + YCAFP)
         if line.find('YCAFPR') == 69: # check code with red flag in old files  
             data['VERMELHA Consumo ativo NP (kWh)'] = CANP
             data['VERMELHA Consumo ativo FP (kWh)'] = CAFP                   
