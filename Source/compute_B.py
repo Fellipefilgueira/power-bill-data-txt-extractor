@@ -25,7 +25,7 @@ def compute_B(j, text, data):
             XCAT = float(line[100:113])/100
         if line.find("14") == 0 and line.find("YCAT") == 69:
             YCAT = float(line[100:113])/100
-            data['Despesa consumo ativo (R$)'] = XCAT + YCAT
+            data['Despesa consumo ativo (R$)'] = (XCAT + YCAT)
         if line.find("14") == 0 and line.find("ZCRE") == 69:
             data['Consumo reativo excedente (kvarh)'] = float(line[75:87])/100
             data['Despesa consumo reativo excedente (R$)'] = float(line[100:113])/100 
@@ -33,15 +33,15 @@ def compute_B(j, text, data):
             bandeira = line[ 132 : line.find('\n') ]
             if bandeira == 'VERDE':
                 data['VERDE Consumo ativo (kWh)'] = CAT 
-                data['VERDE Despesa consumo ativo (R$)'] = XCAT + YCAT
+                data['VERDE Despesa consumo ativo (R$)'] = (XCAT + YCAT)
                 data['Dias bandeira VERDE'] = ciclo
             if bandeira == 'AMARELA':
                 data['AMARELA Consumo ativo (kWh)'] = CAT
-                data['AMARELA Despesa consumo ativo (R$)'] = XCAT + YCAT
+                data['AMARELA Despesa consumo ativo (R$)'] = (XCAT + YCAT)
                 data['Dias bandeira AMARELA'] = ciclo
             if bandeira == 'VERMELHA':
                 data['VERMELHA Consumo ativo (kWh)'] = CAT 
-                data['VERMELHA Despesa consumo ativo (R$)'] =  XCAT + YCAT
+                data['VERMELHA Despesa consumo ativo (R$)'] =  (XCAT + YCAT)
                 data['Dias bandeira VERMELHA'] = ciclo
         if line.find('14') == 0 and line.find('WHTAX') == 69:
             data['Tributo (R$)'] = float(line[99:113])/100
