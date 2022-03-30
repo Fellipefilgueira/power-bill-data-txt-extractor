@@ -29,12 +29,9 @@ def compute_A(j, text, data):
             data['Demanda ativa contratada NP (kW)'] = float(line[187:216])/100
             data['Demanda ativa contratada FP (kW)'] = float(line[216:228])/100
         if line.find('13') == 0 and line.find('CANP') == 87:
-            data['Consumo ativo NP (kWh)'] = float(line[151:166])/100
             d0 = datetime.strptime(f'{line[93:101]}', '%d%m%Y') 
             d1 = datetime.strptime(f'{line[101:109]}', '%d%m%Y')
             ciclo = int(abs((d1-d0).days))+1
-        if line.find('13') == 0 and line.find('CAFP') == 87:
-            data['Consumo ativo FP (kWh)'] = float(line[151:166])/100
         if line.find('13') == 0 and line.find('DEMNP') == 87:
             DEMNP = float(line[151:166])/100
             data['Demanda máxima NP (kW)'] = DEMNP
@@ -75,9 +72,11 @@ def compute_A(j, text, data):
             data['Demanda reativa excedente FP (kvar)'] = float(line[75:87])/100
             data['Despesa demanda reativa excedente FP (R$)'] = float(line[100:113])/100            
         if line.find('14') == 0 and line.find('XCANP') == 69:
+            data['Consumo ativo NP (kWh)'] = float(line[75:87])/100
             CANP = float(line[75:87])/100
             XCANP = float(line[100:113])/100   
         if line.find('14') == 0 and line.find('XCAFP') == 69:
+            data['Consumo ativo FP (kWh)'] = float(line[75:87])/100
             CAFP = float(line[75:87])/100
             XCAFP = float(line[100:113])/100        
         if line.find('14') == 0 and line.find('YCANP') == 69:
@@ -88,7 +87,7 @@ def compute_A(j, text, data):
             data['Despesa consumo ativo FP (R$)'] = XCAFP + YCAFP
             data['Fator de carga NP'] = round( CANP / ( DEMNP * ( ciclo - 8 )*3 ), 2)
             data['Fator de carga FP'] = round( CAFP / ( DEMFP * ( ( ciclo - 8 )*21 + 8*24 )), 2)
-        if line.find('YCAFPG') == 69: # check code with green flag in old files 
+        if line.find('YCAFPD') == 69: # check code with green flag in old files 
             data['VERDE Consumo ativo NP (kWh)'] = CANP
             data['VERDE Consumo ativo FP (kWh)'] = CAFP                   
             data['VERDE Despesa consumo ativo NP (R$)'] = XCANP + YCANP
@@ -100,7 +99,7 @@ def compute_A(j, text, data):
             data['AMARELA Despesa consumo ativo NP (R$)'] = XCANP + YCANP
             data['AMARELA Despesa consumo ativo FP (R$)'] = XCAFP + YCAFP
             data['Dias bandeira AMARELA'] = ciclo
-        if line.find('YCAFPR') == 69: # check code with red flag in old files  
+        if line.find('YCAFPM') == 69: # check code with red flag in old files  
             data['VERMELHA Consumo ativo NP (kWh)'] = CANP
             data['VERMELHA Consumo ativo FP (kWh)'] = CAFP                   
             data['VERMELHA Despesa consumo ativo NP (R$)'] = XCANP + YCANP
