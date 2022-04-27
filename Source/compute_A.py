@@ -111,5 +111,36 @@ def compute_A(j, text, data):
             data['Despesa consumo reativo excedente FP (R$)'] = float(line[100:113])/100
         if line.find('14') == 0 and line.find('WHTAX ') == 69:
             data['Tributo (R$)'] = float(line[99:113])/100
-            
+        
+        # code for bills in 2019 or before 
+
+        if line.find('14') == 0 and line.find('ZCANP') == 69:
+            CANP = float(line[75:87])/100
+            ZCANP = float(line[100:113])/100 
+            data['Consumo ativo NP (kWh)'] = ZCANP
+        if line.find('14') == 0 and line.find('ZCAFP') == 69:
+            CAFP = float(line[75:87])/100
+            ZCAFP = float(line[100:113])/100 
+            data['Consumo ativo FP (kWh)'] = ZCAFP
+            data['Fator de carga NP'] = round( CANP / ( DEMNP * ( ciclo - 8 )*3 ), 2)
+            data['Fator de carga FP'] = round( CAFP / ( DEMFP * ( ( ciclo - 8 )*21 + 8*24 )), 2)
+        if line.find('ZCAFPD') == 69: # check code with green flag in old files 
+            data['VERDE Consumo ativo NP (kWh)'] = CANP
+            data['VERDE Consumo ativo FP (kWh)'] = CAFP                   
+            data['VERDE Despesa consumo ativo NP (R$)'] = ZCANP
+            data['VERDE Despesa consumo ativo FP (R$)'] = ZCAFP
+            data['Dias bandeira VERDE'] = ciclo                       
+        if line.find('ZCAFPA') == 69:
+            data['AMARELA Consumo ativo NP (kWh)'] = CANP
+            data['AMARELA Consumo ativo FP (kWh)'] = CAFP                   
+            data['AMARELA Despesa consumo ativo NP (R$)'] = ZCANP
+            data['AMARELA Despesa consumo ativo FP (R$)'] = ZCAFP
+            data['Dias bandeira AMARELA'] = ciclo
+        if line.find('ZCAFPM') == 69: # check code with red flag in old files  
+            data['VERMELHA Consumo ativo NP (kWh)'] = CANP
+            data['VERMELHA Consumo ativo FP (kWh)'] = CAFP                   
+            data['VERMELHA Despesa consumo ativo NP (R$)'] = ZCANP
+            data['VERMELHA Despesa consumo ativo FP (R$)'] = ZCAFP
+            data['Dias bandeira VERMELHA'] = ciclo  
+
     return(data)
